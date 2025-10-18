@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دکتر علی حتمی - عضو هیئت مدیره شرکت گاز استان آذربایجان شرقی</title>
+    <!-- Vue.js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Social Media Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ8g3M5K+E2N7H7/H6bM6V/0Tq/rX8rC4rN9w1E9GqgK5T1A+LzD4/KzWw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        /* تعریف فونت وزیرمتن با استفاده از مسیر محلی اعلام شده */
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('/fonts/Vazirmatn-VariableFont_wght.ttf') format('truetype');
+            font-weight: 100 900; /* پشتیبانی از تمامی وزن‌ها */
+            font-display: swap; /* تضمین نمایش متن در حین بارگذاری فونت */
+        }
+        
+        * {
+            /* استفاده از Vazirmatn با Tahoma به عنوان فال‌بک */
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+        }
+        
+        /* تعریف رنگ‌های سازمانی رسمی (Dark Blue, Navy, Metallic Gold) */
+        :root {
+            --primary-color: #003366; /* سرمه‌ای تیره (Navy) */
+            --secondary-color: #0055A4; /* آبی درباری/سازمانی */
+            --accent-color: #C8A850; /* طلایی رسمی/متالیک */
+            --gold-color: #B58F30; /* برنزی/Dark Gold */
+            --dark-blue: #002244; /* آبی بسیار تیره برای عمق */
+            --box-background: #ffffff; /* رنگ ثابت باکس‌ها: سفید */
+            --social-bg-color: #004488;
+        }
+        
+        .islamic-border {
+            /* تنظیم مرز هندسی طلایی */
+            background: linear-gradient(45deg, transparent 30%, var(--accent-color) 30%, var(--accent-color) 70%, transparent 70%),
+                        linear-gradient(-45deg, transparent 30%, var(--gold-color) 30%, var(--gold-color) 70%, transparent 70%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            padding: 3px;
+            border-radius: 15px;
+        }
+        
+        .islamic-pattern {
+            /* الگوی اسلیمی با ترکیب رنگ‌های رسمی */
+            background-image: 
+                radial-gradient(circle at 20px 20px, var(--primary-color) 1px, transparent 1px),
+                radial-gradient(circle at 60px 60px, var(--secondary-color) 1px, transparent 1px),
+                repeating-linear-gradient(45deg, rgba(200, 168, 80, 0.1) 0, rgba(200, 168, 80, 0.1) 10px, transparent 10px, transparent 20px);
+            background-size: 80px 80px;
+        }
+
+        /* --- الگوی پس‌زمینه جدید (مشابه تصویر) --- */
+        .official-bg {
+            background-color: var(--dark-blue); /* #002244 رنگ زمینه پایه */
+            /* گرادیانت تیره پایه برای عمق */
+            background-image: 
+                linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-color) 100%),
+                /* الگوی هندسی اسلیمی ظریف با استفاده از نقاط و خطوط طلایی کم‌رنگ */
+                radial-gradient(circle at 50% 50%, rgba(200, 168, 80, 0.05) 2px, transparent 2px), 
+                repeating-linear-gradient(45deg, rgba(200, 168, 80, 0.02) 0, rgba(200, 168, 80, 0.02) 15px, transparent 15px, transparent 30px), 
+                repeating-linear-gradient(-45deg, rgba(200, 168, 80, 0.02) 0, rgba(200, 168, 80, 0.02) 15px, transparent 15px, transparent 30px);
+                
+            background-size: cover, 40px 40px, 80px 80px, 80px 80px;
+            background-repeat: no-repeat, repeat, repeat, repeat;
+            background-blend-mode: overlay, normal, normal, normal; 
+            /* این الگو شبیه الگوی کاشی‌کاری تیره و رسمی است */
+        }
+        
+        .ornamental-frame {
+            position: relative;
+            border: 4px solid var(--accent-color);
+            border-radius: 20px;
+            background: var(--box-background); /* رنگ باکس ثابت */
+        }
+        
+        .ornamental-frame::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            /* گرادیانت حاشیه رسمی */
+            background: linear-gradient(45deg, var(--accent-color), var(--gold-color));
+            border-radius: 24px;
+            z-index: -1;
+        }
+        
+        .ornamental-corner {
+             /* اضافه کردن فضای خالی برای فاصله گرفتن آیکون‌ها از متن */
+            padding-right: 40px; 
+            padding-left: 40px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .ornamental-corner::before {
+            content: '⚜'; /* نماد رسمی‌تر */
+            position: absolute;
+            top: 50%;
+            right: -15px; /* تنظیم موقعیت دقیق‌تر */
+            transform: translateY(-50%) rotate(0deg);
+            color: var(--accent-color);
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .ornamental-corner::after {
+            content: '⚜'; /* نماد رسمی‌تر */
+            position: absolute;
+            top: 50%;
+            left: -15px; /* تنظیم موقعیت دقیق‌تر */
+            transform: translateY(-50%) rotate(0deg);
+            color: var(--accent-color);
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .gradient-text {
+            /* متن گرادیانت با رنگ‌های سازمانی طلایی-سرمه‌ای */
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* تمامی کارت‌های محتوا از این کلاس استفاده می‌کنند تا یک رنگ ثابت داشته باشند */
+        .content-card {
+            background-color: var(--box-background); 
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            box-shadow: 0 10px 20px rgba(0, 51, 102, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* دکمه اصلی - تغییرات اعمال شده برای اسلیمی و برجسته شدن */
+        .btn-primary {
+            /* تغییر به پس‌زمینه آبی سازمانی و متن سفید */
+            background-color: var(--primary-color);
+            color: var(--box-background);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent; 
+            background-clip: padding-box;
+            box-shadow: 0 8px 20px rgba(0, 51, 102, 0.4); /* سایه برجسته آبی */
+        }
+
+        .btn-primary::after {
+            /* حاشیه اسلیمی گرادیانت برای دکمه - طلایی متالیک */
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, var(--accent-color) 0%, var(--gold-color) 50%, var(--accent-color) 100%);
+            border-radius: 53px; /* کمی بزرگتر از دکمه */
+            z-index: -1;
+            padding: 3px;
+            /* ماسک برای ایجاد حاشیه (border) اسلیمی */
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+        }
+        
+        .btn-primary:hover {
+            /* افکت هاور قوی‌تر (تغییر به طلایی/روشن‌تر) */
+            color: var(--primary-color);
+            background: var(--accent-color); 
+            box-shadow: 0 12px 30px rgba(200, 168, 80, 0.5); 
+            transform: translateY(-2px);
+        }
+        /* در هاور، حاشیه طلایی باقی می‌ماند و فقط رنگ داخل عوض می‌شود */
+        .btn-primary:hover::after {
+             background: linear-gradient(45deg, var(--gold-color), var(--accent-color));
+        }
+
+        
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), var(--gold-color), var(--accent-color), transparent);
+            margin: 40px 0;
+            border-radius: 2px;
+        }
+        
+        /* کلاس برای لوگوی سازمانی (به جای نماد گاز) */
+        .corporate-logo {
+            font-size: 50px;
+            font-weight: 800;
+            color: var(--primary-color); 
+        }
+
+        /* --- استایل جدید شبکه‌های اجتماعی شناور (Fixed Floating Bar) --- */
+        .fixed-social-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color); /* رنگ آبی برای آیکون */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* سایه کوچک */
+        }
+        /* حاشیه اسلیمی طلایی برای آیکون‌های شبکه‌های اجتماعی */
+        .social-icon::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--accent-color), var(--gold-color));
+            border-radius: 50%;
+            z-index: -1;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.1);
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+        }
+        
+        /* استایل‌های بخش شبکه‌های اجتماعی مرکزی (فوتر) */
+        .social-links-center {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* فاصله بیشتر بین آیکون‌ها */
+            margin-top: 20px;
+        }
+        
+        /* سایر استایل‌ها (انیمیشن‌ها) دست نخورده باقی ماندند */
+        .floating-animation { animation: floating 3s ease-in-out infinite; }
+        @keyframes floating { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        .slide-in-right { animation: slideInRight 0.8s ease-out; }
+        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .fade-in-up { animation: fadeInUp 0.8s ease-out; }
+        @keyframes fadeInUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .glass-effect { background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.18); }
+        
+        /* استایل مخصوص تصویر پروفایل */
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* مطمئن می‌شود تصویر کل دایره را پر کند */
+            border-radius: 50%;
+        }
+
+        /* مخفی کردن نوار شناور در حالت موبایل برای فضای بهتر */
+        @media (max-width: 768px) {
+            .fixed-social-bar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<!-- اعمال گرادیانت آبی تیره و پس‌زمینه اسلیمی به Body -->
+<body class="official-bg">
+    
+    <div id="app">
+        <!-- صفحه معرفی -->
+        <div v-if="currentPage === 'intro'" class="min-h-screen flex items-center justify-center p-4">
+            <div class="ornamental-frame max-w-6xl w-full overflow-hidden fade-in-up shadow-2xl">
+                <div class="lg:flex">
+                    <!-- تصویر و معرفی - پس‌زمینه آبی تیره رسمی -->
+                    <div class="lg:w-1/2 bg-gradient-to-br from-dark-blue via-primary-color to-secondary-color p-12 flex items-center justify-center relative">
+                        <div class="absolute inset-0 opacity-20 islamic-pattern"></div>
+                        <div class="text-center relative z-10">
+                            <div class="profile-avatar mx-auto mb-8 floating-animation">
+                                <div class="w-full h-full bg-white rounded-full flex items-center justify-center overflow-hidden">
+                                    <!-- جایگزینی با تگ تصویر شخصی و به‌روزرسانی منبع به Dr.Hatmi.jpg -->
+                                    <img src="/images/image.png" 
+                                         alt="تصویر پروفایل دکتر علی حتمی" 
+                                         class="profile-image" 
+                                         onerror="this.onerror=null; this.src='image.png';"
+                                    />
+                                </div>
+                            </div>
+                            <!-- نام شخص با رنگ آبی سرمه‌ای و کلاس ornamental-corner جدید -->
+                            <h1 class="text-4xl font-extrabold mb-4 ornamental-corner" style="color: var(--box-background); background: var(--primary-color); padding: 5px 15px; border-radius: 5px;">دکتر علی حتمی</h1>
+                            <!-- عنوان شغل رسمی -->
+                            <p class="text-xl text-accent-color mb-2 font-medium">عضو هیئت مدیره شرکت گاز استان آذربایجان شرقی</p>
+                            <div class="section-divider"></div>
+                            <!-- رنگ متن برای دیده شدن بهتر تقویت شد -->
+                            <p class="text-lg text-accent-color font-bold">متخصص تحلیل سیستم‌های مدیریتی و استراتژی‌های ملی انرژی</p>
+                        </div>
+                    </div>
+                    
+                    <!-- رزومه و سوابق -->
+                    <div class="lg:w-1/2 p-12 slide-in-right content-card rounded-l-none">
+                        <h2 class="text-3xl font-bold gradient-text mb-8 text-center">سوابق علمی و اجرایی</h2>
+                        
+                        <div class="space-y-6">
+                            <div v-for="(item, index) in resumeItems" :key="index" 
+                                 class="flex items-start space-x-4 space-x-reverse p-4 rounded-xl hover-lift content-card shadow-sm">
+                                <div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl bg-gray-100 shadow-inner border border-primary-color"
+                                     :class="item.iconBg">
+                                    {{ item.icon }}
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-semibold text-primary-color mb-2">{{ item.title }}</h3>
+                                    <p class="text-gray-700 leading-relaxed">{{ item.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-12 text-center">
+                            <button @click="enterSite" class="btn-primary">
+                                ورود به پرتال رسمی
+                                <span class="mr-2">🔑</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- صفحه اصلی -->
+        <div v-if="currentPage === 'main'" class="min-h-screen">
+            <!-- هدر -->
+            <header class="glass-effect sticky top-0 z-50 islamic-border">
+                <div class="container mx-auto px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-6 space-x-reverse">
+                            <div class="w-16 h-16 bg-gradient-to-br from-primary-color to-secondary-color rounded-full flex items-center justify-center">
+                                <!-- لوگوی سازمانی کوچک در هدر -->
+                                <span class="text-white font-extrabold text-2xl">G</span> 
+                            </div>
+                            <div>
+                                <h1 class="text-2xl font-bold gradient-text">دکتر علی حتمی</h1>
+                                <!-- تغییر عنوان شغل رسمی -->
+                                <p class="text-gray-600">عضو هیئت مدیره شرکت گاز</p>
+                            </div>
+                        </div>
+                        
+                        <nav class="hidden md:flex space-x-8 space-x-reverse">
+                            <a v-for="nav in navigation" :key="nav.id"
+                               @click="activeSection = nav.id"
+                               :class="['cursor-pointer font-medium transition-all duration-300 px-4 py-2 rounded-full',
+                                       activeSection === nav.id ? 'bg-primary-color text-white shadow-lg' : 'text-gray-700 hover:text-primary-color']">
+                                {{ nav.title }}
+                            </a>
+                        </nav>
+                        
+                        <button @click="goBack" class="btn-primary px-6 py-3">
+                            بازگشت به معرفی
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- محتوای اصلی -->
+            <main class="container mx-auto px-6 py-12">
+                <!-- بخش اخبار -->
+                <section v-show="activeSection === 'news'" class="fade-in-up">
+                    <h2 class="text-4xl font-bold text-center gradient-text mb-12 ornamental-corner">اخبار و اطلاعیه‌های رسمی</h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <article v-for="news in newsItems" :key="news.id" 
+                                class="content-card rounded-2xl p-8 hover-lift cursor-pointer shadow-lg"
+                                @click="selectNews(news)">
+                            <div class="w-full h-48 rounded-xl mb-6 flex items-center justify-center text-6xl shadow-inner bg-gray-100"
+                                 :class="news.iconBg">
+                                {{ news.icon }}
+                            </div>
+                            <h3 class="text-2xl font-semibold text-primary-color mb-4">{{ news.title }}</h3>
+                            <p class="text-gray-700 mb-6 leading-relaxed">{{ news.excerpt }}</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-500">{{ news.date }}</span>
+                                <span class="text-secondary-color font-medium">مشاهده جزئیات ←</span>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- بخش اطلاع‌رسانی -->
+                <section v-show="activeSection === 'announcements'" class="fade-in-up">
+                    <h2 class="text-4xl font-bold text-center gradient-text mb-12 ornamental-corner">اطلاعات جلسات و رویدادها</h2>
+                    <div class="ornamental-frame p-10 content-card">
+                        <div class="space-y-8">
+                            <div v-for="announcement in announcements" :key="announcement.id"
+                                 class="p-6 rounded-2xl hover-lift transition-all duration-300 shadow-md bg-gray-50">
+                                <div class="flex items-start space-x-4 space-x-reverse">
+                                    <div class="text-4xl text-primary-color">{{ announcement.icon }}</div>
+                                    <div class="flex-1">
+                                        <h3 class="text-xl font-semibold text-primary-color mb-3">{{ announcement.title }}</h3>
+                                        <p class="text-gray-700 mb-2 font-medium">{{ announcement.description }}</p>
+                                        <p class="text-sm text-gray-600">{{ announcement.details }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- بخش گالری -->
+                <section v-show="activeSection === 'gallery'" class="fade-in-up">
+                    <h2 class="text-4xl font-bold text-center gradient-text mb-12 ornamental-corner">گالری رسمی تصاویر و مستندات</h2>
+                    
+                    <div class="mb-12">
+                        <h3 class="text-2xl font-semibold text-primary-color mb-8">ویدئوهای مدیریتی</h3>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div v-for="video in videos" :key="video.id"
+                                 class="relative rounded-2xl overflow-hidden hover-lift cursor-pointer h-64 shadow-xl content-card"
+                                 @click="playVideo(video)">
+                                <div class="absolute inset-0 flex items-center justify-center bg-primary-color bg-opacity-80">
+                                    <div class="text-center text-white">
+                                        <div class="text-6xl mb-4">{{ video.icon }}</div>
+                                        <p class="text-xl font-medium">{{ video.title }}</p>
+                                    </div>
+                                </div>
+                                <div class="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-10 transition-all duration-300"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold text-primary-color mb-8">تصاویر رویدادها</h3>
+                        <div class="grid md:grid-cols-4 lg:grid-cols-6 gap-6">
+                            <div v-for="image in images" :key="image.id"
+                                 class="aspect-square rounded-xl hover-lift cursor-pointer flex items-center justify-center text-4xl shadow-md content-card bg-gray-100"
+                                 :class="image.iconBg"
+                                 @click="viewImage(image)">
+                                {{ image.icon }}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- بخش تماس -->
+                <section v-show="activeSection === 'contact'" class="fade-in-up">
+                    <h2 class="text-4xl font-bold text-center gradient-text mb-12 ornamental-corner">ارتباط با دفتر مدیریت</h2>
+                    <div class="grid lg:grid-cols-2 gap-12">
+                        <div class="ornamental-frame p-10 content-card">
+                            <h3 class="text-2xl font-semibold gradient-text mb-8">اطلاعات تماس رسمی</h3>
+                            <div class="space-y-6">
+                                <div v-for="contact in contactInfo" :key="contact.id"
+                                     class="flex items-center space-x-4 space-x-reverse p-4 rounded-xl hover-lift content-card shadow-sm bg-gray-50">
+                                    <div class="w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg bg-white border border-primary-color"
+                                         :class="contact.iconBg">
+                                        {{ contact.icon }}
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-primary-color text-lg">{{ contact.title }}</p>
+                                        <p class="text-gray-700">{{ contact.value }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ornamental-frame p-10 content-card">
+                            <h3 class="text-2xl font-semibold gradient-text mb-8">ارسال مکاتبات رسمی</h3>
+                            <form @submit.prevent="sendMessage" class="space-y-6">
+                                <div>
+                                    <label class="block text-lg font-medium text-primary-color mb-3">نام و نام خانوادگی / عنوان سازمان</label>
+                                    <input v-model="messageForm.name" type="text" 
+                                           class="w-full px-6 py-4 border-2 border-gray-300 rounded-xl focus:border-primary-color focus:outline-none transition-all duration-300" 
+                                           required>
+                                </div>
+                                <div>
+                                    <label class="block text-lg font-medium text-primary-color mb-3">موضوع نامه / درخواست</label>
+                                    <input v-model="messageForm.subject" type="text" 
+                                           class="w-full px-6 py-4 border-2 border-gray-300 rounded-xl focus:border-primary-color focus:outline-none transition-all duration-300" 
+                                           required>
+                                </div>
+                                <div>
+                                    <label class="block text-lg font-medium text-primary-color mb-3">متن مکاتبه</label>
+                                    <textarea v-model="messageForm.message" rows="5" 
+                                              class="w-full px-6 py-4 border-2 border-gray-300 rounded-xl focus:border-primary-color focus:outline-none transition-all duration-300" 
+                                              required></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary w-full" :disabled="isSubmitting">
+                                    {{ isSubmitting ? 'در حال ارسال مکاتبه...' : 'ارسال درخواست رسمی' }}
+                                    <span class="mr-2">📝</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- فوتر -->
+            <footer class="bg-gradient-to-r from-dark-blue to-primary-color text-white py-12">
+                <div class="container mx-auto px-6 text-center">
+                    <div class="section-divider"></div>
+                    <p class="text-xl mb-6">© ۱۴۰۳ پرتال رسمی دکتر علی حتمی - عضو هیئت مدیره شرکت گاز استان آذربایجان شرقی</p>
+                    
+                    <!-- بخش جدید شبکه‌های اجتماعی - مرکز صفحه (استفاده از آیکون‌های Font Awesome) -->
+                    <div class="social-links-center">
+                        <a href="#" class="social-icon" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon" title="تلگرام"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="#" class="social-icon" title="ایتا (پیام رسان)"><i class="fas fa-comment-dots"></i></a>
+                        <a href="#" class="social-icon" title="آپارات (ویدئو)"><i class="fas fa-video"></i></a>
+                        <a href="#" class="social-icon" title="یوتیوب"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    
+                </div>
+            </footer>
+        </div>
+        
+        <!-- نوار شناور شبکه‌های اجتماعی (Fixed Social Bar) - سمت چپ و پایین (استفاده از آیکون‌های Font Awesome) -->
+        <div class="fixed-social-bar">
+            <a href="#" class="social-icon" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon" title="تلگرام"><i class="fab fa-telegram-plane"></i></a>
+            <a href="#" class="social-icon" title="ایتا (پیام رسان)"><i class="fas fa-comment-dots"></i></a>
+            <a href="#" class="social-icon" title="آپارات (ویدئو)"><i class="fas fa-video"></i></a>
+            <a href="#" class="social-icon" title="یوتیوب"><i class="fab fa-youtube"></i></a>
+        </div>
+        
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+        
+        createApp({
+            data() {
+                return {
+                    currentPage: 'intro',
+                    activeSection: 'news',
+                    isSubmitting: false,
+                    messageForm: {
+                        name: '',
+                        subject: '',
+                        message: ''
+                    },
+                    navigation: [
+                        { id: 'news', title: 'اخبار رسمی' },
+                        { id: 'announcements', title: 'اطلاع‌رسانی' },
+                        { id: 'gallery', title: 'گالری' },
+                        { id: 'contact', title: 'ارتباط با دفتر' }
+                    ],
+                    resumeItems: [
+                        {
+                            icon: '🏛️', /* آیکون رسمی‌تر برای تحصیلات */
+                            title: 'تحصیلات عالیه',
+                            description: 'دکترای مدیریت تحلیل سیستم داده‌ها از دانشگاه معتبر کشور',
+                            iconBg: 'text-primary-color'
+                        },
+                        {
+                            icon: '📋', /* آیکون رسمی‌تر برای شغل فعلی */
+                            title: 'سمت اجرایی فعلی',
+                            description: 'عضو هیئت مدیره شرکت گاز استان آذربایجان شرقی (شغل فعلی)',
+                            iconBg: 'text-secondary-color'
+                        },
+                        {
+                            icon: '📝', /* آیکون رسمی‌تر برای مجامع علمی */
+                            title: 'عضویت در مجامع علمی',
+                            description: 'عضو هیئت علمی دانشگاه و مشارکت فعال در پژوهش‌های کلان مدیریتی',
+                            iconBg: 'text-secondary-color'
+                        },
+                        {
+                            icon: '✅', /* آیکون رسمی‌تر برای مدیریت پروژه‌ها */
+                            title: 'مدیریت پروژه‌ها',
+                            description: 'مدیریت و نظارت بر راه‌اندازی فازهای حیاتی پارس جنوبی',
+                            iconBg: 'text-accent-color'
+                        }
+                    ],
+                    newsItems: [
+                        {
+                            id: 1,
+                            title: 'جلسه توسعه زیرساخت گاز',
+                            excerpt: 'نشست بررسی استراتژی‌های توسعه شبکه‌های گازرسانی در مناطق استانی و بهبود خدمات مشترکین...',
+                            date: '۲ روز پیش',
+                            icon: '📰',
+                            iconBg: 'text-primary-color'
+                        },
+                        {
+                            id: 2,
+                            title: 'همایش ملی بهینه‌سازی انرژی',
+                            excerpt: 'سخنرانی در خصوص مدیریت و بهینه‌سازی مصرف انرژی در سطح صنایع و منازل و لزوم برنامه‌ریزی جامع...',
+                            date: '۱ هفته پیش',
+                            icon: '⚡',
+                            iconBg: 'text-secondary-color'
+                        },
+                        {
+                            id: 3,
+                            title: 'دیدار با مقامات عالی استان',
+                            excerpt: 'ملاقات با مقامات ارشد استان آذربایجان شرقی جهت هماهنگی پروژه‌های زیربنایی و عمرانی...',
+                            date: '۳ روز پیش',
+                            icon: '🤝',
+                            iconBg: 'text-accent-color'
+                        }
+                    ],
+                    announcements: [
+                        {
+                            id: 1,
+                            icon: '📅',
+                            title: 'زمان برگزاری جلسه هیئت مدیره',
+                            description: 'تاریخ: سه‌شنبه ۲۵ دی ماه ۱۴۰۳ - ساعت ۱۴:۰۰',
+                            details: 'مکان: سالن جلسات مرکزی شرکت گاز استان، به صورت محرمانه',
+                            bgClass: 'border-r-4 border-primary-color'
+                        },
+                        {
+                            id: 2,
+                            icon: '📋',
+                            title: 'آغاز طرح ویژه حمایت از مصرف بهینه',
+                            description: 'مهلت ثبت‌نام: تا پایان بهمن ماه جاری',
+                            details: 'جزئیات این طرح در پرتال رسمی شرکت گاز استان موجود است.',
+                            bgClass: 'border-r-4 border-secondary-color'
+                        },
+                        {
+                            id: 3,
+                            icon: '⚠️',
+                            title: 'اخطار مهم امنیتی',
+                            description: 'توجه به هشدارهای کلاهبرداری تلفنی و عدم ارائه اطلاعات شخصی به افراد ناشناس.',
+                            details: 'شرکت هیچ‌گونه درخواست وجهی از طریق پیامک یا تماس ندارد.',
+                            bgClass: 'border-r-4 border-gold-color'
+                        }
+                    ],
+                    videos: [
+                        {
+                            id: 1,
+                            title: 'بیانیه رسمی در خصوص مدیریت گاز',
+                            icon: '🎥',
+                            bgClass: 'bg-primary-color'
+                        },
+                        {
+                            id: 2,
+                            title: 'گزارش عملکرد سه ماهه شرکت',
+                            icon: '📺',
+                            bgClass: 'bg-secondary-color'
+                        },
+                        {
+                            id: 3,
+                            title: 'مصاحبه ویژه مطبوعاتی',
+                            icon: '🎤',
+                            bgClass: 'bg-accent-color'
+                        }
+                    ],
+                    images: [
+                        { id: 1, icon: '🏛️', iconBg: 'text-primary-color' },
+                        { id: 2, icon: '🤝', iconBg: 'text-secondary-color' },
+                        { id: 3, icon: '📋', iconBg: 'text-primary-color' },
+                        { id: 4, icon: '🎯', iconBg: 'text-secondary-color' },
+                        { id: 5, icon: '📊', iconBg: 'text-primary-color' },
+                        { id: 6, icon: '🏆', iconBg: 'text-accent-color' }
+                    ],
+                    contactInfo: [
+                        {
+                            id: 1,
+                            icon: '📞',
+                            title: 'تلفن دفتر مدیریت',
+                            value: '۰۴۱-۳۳۴۴۵۵۶۶ (ساعات اداری)',
+                            iconBg: 'text-primary-color'
+                        },
+                        {
+                            id: 2,
+                            icon: '📧',
+                            title: 'پست الکترونیکی رسمی',
+                            value: 'manager@eagas.ir',
+                            iconBg: 'text-secondary-color'
+                        },
+                        {
+                            id: 3,
+                            icon: '📍',
+                            title: 'آدرس دفتر مرکزی',
+                            value: 'آذربایجان شرقی، تبریز، خیابان آزادی، دفتر مرکزی شرکت گاز استان',
+                            iconBg: 'text-gold-color'
+                        }
+                    ]
+                }
+            },
+           methods: {
+    enterSite() {
+        // تغییر به لینک مورد نظر
+        window.location.href = 'fa';
+    },
+    goBack() {
+        this.currentPage = 'intro';
+    },
+                // تابع ساخت یک مودال سفارشی ساده
+                showCustomAlert(title, message) {
+                    const modal = document.createElement('div');
+                    modal.className = 'fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[9999] p-4';
+                    modal.innerHTML = `
+                        <div class="bg-white p-10 rounded-xl shadow-2xl max-w-md w-full text-right transform transition-all scale-100 duration-300 ornamental-frame">
+                            <h3 class="text-xl font-bold text-primary-color mb-4 border-b pb-3">${title}</h3>
+                            <p class="text-gray-700 mb-6">${message}</p>
+                            <button class="btn-primary w-full mt-4" onclick="document.body.removeChild(this.parentNode.parentNode)">تأیید و بستن</button>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+                },
+                selectNews(news) {
+                    this.showCustomAlert(`عنوان خبر: ${news.title}`, news.excerpt);
+                },
+                playVideo(video) {
+                    this.showCustomAlert(`ویدئو: ${video.title}`, 'لینک پخش ویدئو در این نسخه نمایشی غیر فعال است.');
+                },
+                viewImage(image) {
+                    this.showCustomAlert(`تصویر رسمی`, 'نمایش تصویر رویداد شماره ' + image.id);
+                },
+                async sendMessage() {
+                    this.isSubmitting = true;
+                    // شبیه‌سازی ارسال پیام
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    this.showCustomAlert('تأیید ارسال مکاتبه', 'مکاتبه شما با موفقیت به دفتر مدیریت ارسال گردید.');
+                    // پاک کردن فرم
+                    this.messageForm = { name: '', subject: '', message: '' };
+                    this.isSubmitting = false;
+                }
+            },
+            mounted() {
+                // جایگزینی alert اصلی با تابع سفارشی
+                if (typeof window !== 'undefined') {
+                    window.alert = this.showCustomAlert.bind(this, 'پیام سیستم', 'عملیات با موفقیت انجام شد.');
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
